@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>objectdetect_yolov5ros_pkg</name>
+  <name>ros_obj_detection</name>
   <version>1.0.1</version>
-  <description>The yolov5_ros package</description>
+  <description>The ros object detection package</description>
 
   <maintainer email="qq44642754@163.com">Zhitao Zheng</maintainer>
 
