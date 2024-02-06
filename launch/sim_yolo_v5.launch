@@ -11,7 +11,7 @@
   <param name="visualize_object_detect"           value="true"/>
 
   <!-- Start yolov5 and ros wrapper -->
-  <node pkg="objectdetect_yolov5ros_pkg" type="yolo_v5.py" name="yolov5_ros" output="screen" >
+  <node pkg="ros_obj_detection" type="yolo_v5.py" name="yolov5_ros" output="screen" >
     <param name="weight_path"       value="$(find objectdetect_yolov5ros_pkg)/weights/gazebo_sim_v5.pt"/>
     <param name="image_topic"       value="/webcam/image_raw" />
     <param name="pub_topic"         value="/yolov5/BoundingBoxes" />
