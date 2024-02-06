@@ -8,7 +8,7 @@ import numpy as np
 
 from std_msgs.msg import Header
 from sensor_msgs.msg import Image
-from objectdetect_yolov5ros_pkg.msg import BoundingBox, BoundingBoxes
+from ros_obj_detection.msg import BoundingBox, BoundingBoxes
 
 
 class Yolo_Dect:
