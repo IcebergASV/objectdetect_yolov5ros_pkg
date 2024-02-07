@@ -26,7 +26,7 @@ This repository is a fork of the original [Yolov5_ros](https://github.com/qq4464
 ### Usage
 1. Open a terminal and launch the ```roslaunch realsense2_camera rs_camera.launch```. The objectdetect_yolov5ros_pkg subscribes to the **/camera/color/image_raw** topic for live camera feed used for object detection.
 2. Reminder to activate your virtual enviornment ```source yolov5_env/bin/activate```
-3. Open a new terminal and launch the ```roslaunch yolov5_ros yolo_v5.launch ```
+3. Open a new terminal and launch the ```roslaunch ros_obj_detection yolo_v5.launch ```
 
 ## Run in Gazebo Simulation 
 ### Requirements
@@ -34,7 +34,7 @@ This repository is a fork of the original [Yolov5_ros](https://github.com/qq4464
 ### Usage
 1. Open a terminal and launch gazebo. The objectdetect_yolov5ros_pkg subscribes to the **/webcam/image_raw** topic for live camera feed in Gazebo Simulation used for object detection.
 2. Reminder to activate your virtual enviornment ```source yolov5_env/bin/activate```
-3. Open a new terminal and launch the ```roslaunch yolov5_ros sim_yolo_v5.launch ```
+3. Open a new terminal and launch the ```roslaunch ros_obj_detection sim_yolo_v5.launch ```
 
 ## Node Parameters
 - **image_topic**: Subscribed camera topic.
