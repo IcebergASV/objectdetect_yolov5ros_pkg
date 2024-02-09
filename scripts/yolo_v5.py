@@ -67,11 +67,17 @@ class Yolo_Dect:
             image.height, image.width, -1)
         self.color_image = cv2.cvtColor(self.color_image, cv2.COLOR_BGR2RGB)
 
-        results = self.model(self.color_image)
+        # Convert RGB to Grayscale
+        self.gray_image = cv2.cvtColor(self.color_image, cv2.COLOR_RGB2GRAY)
+        
+        # If you need to have a 3 channel grayscale image for the model
+        self.gray_image_3channel = cv2.cvtColor(self.gray_image, cv2.COLOR_GRAY2RGB)
+
+        results = self.model(self.gray_image_3channel)
         # xmin    ymin    xmax   ymax  confidence  class    name
 
         boxs = results.pandas().xyxy[0].values
-        self.dectshow(self.color_image, boxs, image.height, image.width)
+        self.dectshow(self.gray_image_3channel, boxs, image.height, image.width)
 
         cv2.waitKey(3)
 
