@@ -67,17 +67,21 @@ class Yolo_Dect:
             image.height, image.width, -1)
         self.color_image = cv2.cvtColor(self.color_image, cv2.COLOR_BGR2RGB)
 
-        # Convert RGB to Grayscale
-        self.gray_image = cv2.cvtColor(self.color_image, cv2.COLOR_RGB2GRAY)
+        # Convert RGB to HSV
+        hsv_image = cv2.cvtColor(self.color_image, cv2.COLOR_RGB2HSV)
         
-        # If you need to have a 3 channel grayscale image for the model
-        self.gray_image_3channel = cv2.cvtColor(self.gray_image, cv2.COLOR_GRAY2RGB)
+        # Perform histogram equalization on the Value channel
+        hsv_image[:, :, 2] = cv2.equalizeHist(hsv_image[:, :, 2])
+        
+        # Convert back to RGB
+        self.equalized_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2RGB)
 
-        results = self.model(self.gray_image_3channel)
+        results = self.model(self.equalized_image)
+
         # xmin    ymin    xmax   ymax  confidence  class    name
 
         boxs = results.pandas().xyxy[0].values
-        self.dectshow(self.gray_image_3channel, boxs, image.height, image.width)
+        self.dectshow(self.equalized_image, boxs, image.height, image.width)
 
         cv2.waitKey(3)
 
