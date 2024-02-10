@@ -67,21 +67,18 @@ class Yolo_Dect:
             image.height, image.width, -1)
         self.color_image = cv2.cvtColor(self.color_image, cv2.COLOR_BGR2RGB)
 
-        # Convert RGB to HSV
-        hsv_image = cv2.cvtColor(self.color_image, cv2.COLOR_RGB2HSV)
+        # Here we're applying it to the RGB image directly
+        laplacian_filtered_image = cv2.Laplacian(self.color_image, cv2.CV_64F)
         
-        # Perform histogram equalization on the Value channel
-        hsv_image[:, :, 2] = cv2.equalizeHist(hsv_image[:, :, 2])
-        
-        # Convert back to RGB
-        self.equalized_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2RGB)
+        # Convert back to uint8
+        self.laplacian_filtered_image_conv = cv2.convertScaleAbs(laplacian_filtered_image)
 
-        results = self.model(self.equalized_image)
+        results = self.model(self.laplacian_filtered_image_conv)  # Pass the Laplacian filtered image to the model
 
         # xmin    ymin    xmax   ymax  confidence  class    name
 
         boxs = results.pandas().xyxy[0].values
-        self.dectshow(self.equalized_image, boxs, image.height, image.width)
+        self.dectshow(laplacian_filtered_image, boxs, image.height, image.width)
 
         cv2.waitKey(3)
 
